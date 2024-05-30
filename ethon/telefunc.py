@@ -50,13 +50,13 @@ async def progress(current, total, event, start, type_of_ps, file=None):
         speed = current / diff
         time_to_completion = round((total - current) / speed) * 1000
         progress_str = "**[{0}{1}]** `| {2}%`\n\n".format(
-            "".join(["🟩" for i in range(math.floor(percentage / 5))]),
-            "".join(["⬜️" for i in range(20 - math.floor(percentage / 5))]),
+            "".join(["▰" for i in range(math.floor(percentage / 10))]),
+            "".join(["▱" for i in range(10 - math.floor(percentage / 10))]),
             round(percentage, 2),
         )
         tmp = (
             progress_str
-            + "📦 GROSS: {0} of {1}\n\n🚀 Speed: {2}/s\n\n⏱️ ETA: {3}\n\n".format(
+            + "⏳ **ɢʀᴏss:** **{0}** **ᴏғ** **{1}**\n\n🚀 **sᴘᴇᴇᴅ:** **{2}/s**\n\n⏱️ **ᴇᴛᴀ:** **{3}**\n\n**ᴘᴏᴡᴇʀᴇᴅ ʙʏ : @dynamicstar".format(
                 hbs(current),
                 hbs(total),
                 hbs(speed),
@@ -120,11 +120,11 @@ async def force_sub(client, channel, id, ft):
         x = await client(GetParticipantRequest(channel=channel, participant=int(id)))
         left = x.stringify()
         if 'left' in left:
-            s, r = True, f"{ft}\n\nAlso join @DroneBots"
+            s, r = True, f"{ft}"
         else:
             s, r = False, None
     except UserNotParticipantError:
-        s, r = True, f"To use this bot you've to join @{channel}.\n\nAlso join @DroneBots"
+        s, r = True, "𝐓𝐨 𝐔𝐬𝐞 𝐓𝐡𝐢𝐬 𝐁𝐨𝐭 𝐅𝐢𝐫𝐬𝐭 𝐉𝐨𝐢𝐧 𝐁𝐞𝐥𝐨𝐰 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 𝐓𝐡𝐞𝐧 𝐀𝐟𝐭𝐞𝐫 𝐔𝐬𝐞 𝐌𝐞."
     except Exception:
-        s, r = True, "ERROR: Add in ForceSub channel, or check your channel id."
+        s, r = True, "**ERROR: Add in ForceSub channel, or check your channel id.**"
     return s, r
